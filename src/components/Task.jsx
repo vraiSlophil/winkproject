@@ -1,17 +1,20 @@
+import PropTypes from 'prop-types';
 
-
-
-
-function Task({ id, titre, description, dateEcheance, statut }) {
-    return (
-        <div id={id}>
+function Task({id, titre, statut, onStatusChange}) {
+    return (<div id={id} className={"task"}>
             <p>{titre}</p>
-            <p>{description}</p>
-            <p>Date d'échéance : {dateEcheance}</p>
-            <p>Statut : {statut}</p>
-
-        </div>
-    )
+            <input type="checkbox"
+                   checked={statut}
+                   onChange={() => onStatusChange(id)}
+            />
+        </div>);
 }
+
+Task.propTypes = {
+    id: PropTypes.number.isRequired,
+    titre: PropTypes.string.isRequired,
+    statut: PropTypes.bool,
+    onStatusChange: PropTypes.func.isRequired,
+};
 
 export default Task;
