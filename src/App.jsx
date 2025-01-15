@@ -25,7 +25,8 @@ const listeDeTaches = [{
 
 function App() {
 
-    const [tasks, setTasks] = useState(listeDeTaches)
+    const [tasks, setTasks] = useState(listeDeTaches);
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
 
     const handleStatusChange = (id) => {
         setTasks(tasks.map(task =>
@@ -33,8 +34,12 @@ function App() {
         ))
     }
 
-    return (<div>
-            <div className="task-container">
+    return (<div className={isDarkTheme ? "dark-theme" : "light-theme"}>
+            <button onClick={() => setIsDarkTheme(!isDarkTheme)}>
+                {isDarkTheme ? "Passer au thème clair" : "Passer au thème sombre"}
+            </button>
+
+            <div className={"task-container"}>
                 {tasks.map((task) => (<Task
                         key={task.id}
                         id={task.id}
