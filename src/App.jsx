@@ -1,4 +1,5 @@
 import Task from "./components/Task.jsx";
+import ThemeButton from "./components/ThemeButton.jsx";
 import "./App.css";
 import {useState} from "react";
 
@@ -34,10 +35,17 @@ function App() {
         ))
     }
 
+    const toggleTheme = () => {
+        setIsDarkTheme(!isDarkTheme);
+    };
+
     return (<div className={isDarkTheme ? "dark-theme" : "light-theme"}>
-            <button onClick={() => setIsDarkTheme(!isDarkTheme)}>
-                {isDarkTheme ? "Passer au thème clair" : "Passer au thème sombre"}
-            </button>
+            <ThemeButton
+                darkMessage={"Passer au thème clair"}
+                lightMessage={"Passer au thème sombre"}
+                onThemeChange={toggleTheme}
+                isDarkTheme={isDarkTheme}
+            />
 
             <div className={"task-container"}>
                 {tasks.map((task) => (<Task
