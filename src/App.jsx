@@ -1,6 +1,7 @@
 import Task from "./components/Task.jsx";
 import ThemeButton from "./components/ThemeButton.jsx";
 import NavBar from "./components/NavBar.jsx";
+import TaskForm from "./components/TaskForm.jsx";
 
 import "./App.css";
 import {useState} from "react";
@@ -35,29 +36,35 @@ function App() {
         setIsDarkTheme(!isDarkTheme);
     };
 
-    return (<div className={isDarkTheme ? "dark-theme" : "light-theme"}>
-        <NavBar
-            title={"WinkProject"}
-            components={[
-                <ThemeButton
-                    darkMessage={"Passer au thème clair"}
-                    lightMessage={"Passer au thème sombre"}
-                    onThemeChange={toggleTheme}
-                    isDarkTheme={isDarkTheme}
-                />
-            ]}
-        />
+    const addTask = (newTask) => {
+        setTasks([...tasks, newTask]);
+    };
+
+    return (
+        <div
+            className={`${isDarkTheme ? "dark-theme" : "light-theme"} main-container`}
+        >
+            <NavBar
+                title={"WinkProject"}
+                components={[
+                    <ThemeButton
+                        darkMessage={"Passer au thème clair"}
+                        lightMessage={"Passer au thème sombre"}
+                        onThemeChange={toggleTheme}
+                        isDarkTheme={isDarkTheme}
+                    />
+                ]}
+            />
 
             <div className={"task-container"}>
+                <TaskForm tasks={tasks} onAddTask={addTask}/>
                 {tasks.map((task) => (<Task
-                        key={task.id}
-                        id={task.id}
-                        titre={task.titre}
-                        description={task.description}
-                        dateCreation={task.dateCreation}
-                        statut={task.statut}
-                        onStatusChange={handleStatusChange}
-                    />))}
+                    key={task.id}
+                    id={task.id}
+                    titre={task.titre}
+                    statut={task.statut}
+                    onStatusChange={handleStatusChange}
+                />))}
             </div>
 
 
