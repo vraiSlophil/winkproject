@@ -1,25 +1,21 @@
 import Task from "./components/Task.jsx";
 import ThemeButton from "./components/ThemeButton.jsx";
+import NavBar from "./components/NavBar.jsx";
+
 import "./App.css";
 import {useState} from "react";
 
 const listeDeTaches = [{
     id: 1,
     titre: "Faire les courses",
-    description: "Acheter du lait, des œufs et du pain",
-    dateCreation: "2023-12-01",
     statut: false
 }, {
     id: 2,
     titre: "Faire du sport",
-    description: "Aller courir pendant 30 minutes",
-    dateCreation: "2023-12-02",
     statut: false
 }, {
     id: 3,
     titre: "Lire un livre",
-    description: "Lire 6 chapitres de Harry Potter",
-    dateCreation: "2023-12-03",
     statut: true
 }];
 
@@ -40,12 +36,17 @@ function App() {
     };
 
     return (<div className={isDarkTheme ? "dark-theme" : "light-theme"}>
-            <ThemeButton
-                darkMessage={"Passer au thème clair"}
-                lightMessage={"Passer au thème sombre"}
-                onThemeChange={toggleTheme}
-                isDarkTheme={isDarkTheme}
-            />
+        <NavBar
+            title={"WinkProject"}
+            components={[
+                <ThemeButton
+                    darkMessage={"Passer au thème clair"}
+                    lightMessage={"Passer au thème sombre"}
+                    onThemeChange={toggleTheme}
+                    isDarkTheme={isDarkTheme}
+                />
+            ]}
+        />
 
             <div className={"task-container"}>
                 {tasks.map((task) => (<Task
